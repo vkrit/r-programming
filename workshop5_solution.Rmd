@@ -1,0 +1,66 @@
+---
+title: "Workshop 5 Solution"
+author: "Veerasak Kritsanapraphan"
+date: ""
+output: html_document
+---
+
+For the first two problems we'll use the Cars93 data set from the MASS library.
+
+```{r}
+library(MASS)
+```
+
+#### 1. Manipulating data frames
+
+Use the `transform()` and `log()` functions to create a new data frame called `Cars93.log` that has `MPG.highway` and `MPG.city` replaced with `log(MPG.highway)` and `log(MPG.city)`.
+
+```{r}
+Cars93.log <- transform(Cars93, MPG.highway = log(MPG.highway), MPG.city = log(MPG.city)) 
+```
+
+#### 2. Functions, lists, and if-else practice
+
+**(a)** Write a function called `isPassingGrade` whose input `x` is a number, and which returns `FALSE` if `x` is lower than 50 and `TRUE` otherwise.
+
+```{r}
+isPassingGrade <- function(x) {
+  did.pass <- TRUE
+  if(x < 50) {
+    did.pass <- FALSE
+  }
+  did.pass
+}
+
+isPassingGrade(45)
+isPassingGrade(90)
+
+# Here's an alternative, using different syntax
+
+isPassingGrade2 <- function(x) (x >= 50)
+
+isPassingGrade2(45)
+isPassingGrade2(90)
+```
+
+**(b)** Write a function called `sendMessage` whose input `x` is a number, and which prints `Congratulations` if `isPassingGrade(x)` is `TRUE` and prints `Oh no!` if `isPassingGrade(x)` is `FALSE`.
+
+```{r}
+sendMessage <- function(x) {
+  if(isPassingGrade(x)) {
+    print("Congratulations!")
+  } else {
+    print("Oh no!")
+  }
+}
+
+sendMessage(45)
+sendMessage(90)
+
+# Here's another way of accomplishing the same thing
+
+sendMessage2 <- function(x) print(ifelse(isPassingGrade(x), "Congratulations", "Oh no!"))
+
+sendMessage2(45)
+sendMessage2(90)
+```

@@ -1,0 +1,44 @@
+---
+title: "Workshop 6 Solution"
+author: "Veerasak Kritsanapraphan"
+date: ""
+output: html_document
+---
+
+#### 1. Loop practice
+
+**(a)** Write a function called `calculateRowMeans` that uses a **for loop** to calculate the row means of a matrix `x`.
+
+```{r}
+# calculateRowMeans computes the row means of a matrix x
+# input: matrix x
+# output: vector of length nrow(x) giving row means of x
+calculateRowMeans <- function(x) {
+  row.means <- numeric(nrow(x))
+  for(i in 1:nrow(x)) {
+    row.means[i] <- mean(x[i,])
+  }
+  row.means
+}
+
+```
+
+**(b)** Try out your function on the random matrix `fake.data` defined below.
+
+```{r}
+set.seed(12345) # Set seed of random number generator
+fake.data <- matrix(rnorm(500), ncol=5)
+calculateRowMeans(fake.data)
+```
+
+**(b)** Use the `apply()` function to calculate the row means of the matrix `fake.data`
+
+```{r}
+apply(fake.data, MARGIN=1, FUN=mean)
+```
+
+**(c)** Compare this to the output of the `rowMeans()` function to check that your calculation is correct.
+
+```{r}
+identical(calculateRowMeans(fake.data), apply(fake.data, MARGIN=1, FUN=mean))
+```

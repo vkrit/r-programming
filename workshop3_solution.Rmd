@@ -1,0 +1,49 @@
+---
+title: "Workshop 3 Solutions"
+author: "Veerasak Kritsanapraphan"
+output: html_document
+---
+
+#### 1. Data practice
+
+In class we imported the survey data using the `read.table()` function. 
+
+This is the code we used:
+
+```{r}
+survey <- read.table("survey_data.csv", header=TRUE, sep=",") 
+```
+
+##### (a) How many survey respondents are from MISM or Other?
+
+```{r}
+sum(survey[["Program"]] == "MISM" | survey[["Program"]] == "Other")
+```
+
+##### (b) What % of survey respondents are from PPM?
+
+```{r}
+100 * sum(survey[["Program"]] == "PPM") / nrow(survey)
+```
+
+#### 2. Index practice
+
+##### (a) Use $ notation to pull the OperatingSystem column from the survey data
+
+```{r}
+survey$OperatingSystem
+```
+
+##### (b) Do the same thing with [,] notation, referring to OperatingSystem by name
+
+```{r}
+survey[, "OperatingSystem"]
+```
+
+##### (c) Repeat part (b), this time referring to OperatingSystem by column number
+
+```{r}
+survey[, 3]
+```
+
+
