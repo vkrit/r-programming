@@ -1,7 +1,7 @@
 ---
 title: "Workshop 3 Solutions"
 author: "Veerasak Kritsanapraphan"
-output: html_document
+output: pdf_document
 ---
 
 #### 1. Data practice
@@ -43,7 +43,7 @@ survey[, "OperatingSystem"]
 ##### (c) Repeat part (b), this time referring to OperatingSystem by column number
 
 ```{r}
-survey[, 3]
+survey[, 4]
 ```
 
 

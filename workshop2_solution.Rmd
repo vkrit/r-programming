@@ -5,28 +5,15 @@ date: ""
 output: html_document
 ---
 
-### 1. Changing the author field and file name.
-
-##### (a) Change the `author:` field on the Rmd document from Your Name Here to your own name.
-
-##### (b) Rename this file to "lab01_YourHameHere.Rmd", where YourNameHere is changed to your own name.
-
-### 2.  Hello World!
-
 Here's an R code chunk that prints the text 'Hello world!'.
 
 ```{r}
 print("Hello world!")
 ```
 
-#### (a) Modify the code chunk below to print your name
-```{r}
-print("Veerasak Kritsanapraphan")
-```
-
 <br>
 
-### 3.  Creating sequences
+### 1.  Creating sequences
 We just learned about the `c()` operator, which forms a vector from its arguments.  If we're trying to build a vector containing a sequence of numbers, there are several useful functions at our disposal.  These are the colon operator `:` and the sequence function `seq()`.
 
 ##### `:` Colon operator: 
@@ -62,43 +49,3 @@ x * y
 ```
 
 <br>
-
-### 4. Cars data
-
-We'll look at data frame and plotting in much more detail in later classes.  For a previous of what's to come, here's a very basic example.
-
-For this example we'll use a very simple dataset.  The `cars` data comes with the default installation of R.  To see the first few columns of the data, just type `head(cars)`.
-
-```{r}
-head(cars)
-```
-
-We'll do a bad thing here and use the `attach()` command, which will allow us to access the `speed` and `dist` columns of `cars` as though they were vectors in our workspace.
-
-```{r}
-attach(cars) # Using this command is poor style.  We will avoid it in the future.
-speed
-dist
-```
-
-#### (a) Calculate the average and standard deviation of speed and distance.
-```{r}
-mean(speed)
-sd(speed)
-mean(dist)
-sd(dist)
-```
-
-<br>
-
-<br>  We can easily produce a histogram of stopping distance using the `hist` function.
-```{r}
-hist(dist) # Histogram of stopping distance
-```
-
-The `plot(x,y,...)` function plots a vector `y` against a vector `x`.  You can type `?plot` into the Console to learn more about the basic plot function. 
-
-#### (b) Use the `plot(x,y)` function to create a scatterplot of dist against speed.
-```{r}
-plot(speed, dist)
-```

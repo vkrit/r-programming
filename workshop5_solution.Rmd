@@ -1,8 +1,8 @@
 ---
 title: "Workshop 5 Solution"
 author: "Veerasak Kritsanapraphan"
-date: ""
-output: html_document
+date: ''
+output: pdf_document
 ---
 
 For the first two problems we'll use the Cars93 data set from the MASS library.
