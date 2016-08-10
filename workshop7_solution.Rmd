@@ -1,8 +1,8 @@
 ---
 title: "Workshop 7"
 author: "Veerasak Kritsanapraphan"
-date: ""
-output: html_document
+date: ''
+output: pdf_document
 ---
 
 We'll begin by loading all the required packages.

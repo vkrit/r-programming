@@ -3,13 +3,13 @@ title: "ggplot2"
 author: "Veerasak Kritsanapraphan"
 date: "January 28, 2016"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     fig_height: 5
     fig_width: 5
     toc: yes
     toc_depth: 5
-  pdf_document:
-    toc: yes
   word_document: default
 ---
 
@@ -293,7 +293,7 @@ The general trends appear to be qualitatively the same, but the association in t
 For this example we're going to use some data based on the 2011 Consumer Expenditure (CE) Survey.  This data is stored in a tab-delimited file called `mtbi.txt`.  
 
 ```{r}
-expenses <- read.table("http://mtbi.txt", sep="\t", header=TRUE)
+expenses <- read.table("mtbi.txt", sep="\t", header=TRUE)
 dim(expenses)
 head(expenses, 20)
 ```

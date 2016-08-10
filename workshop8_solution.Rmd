@@ -1,8 +1,8 @@
 ---
 title: "Workshop 8 Solutions"
 author: "Veerasak Kritsanapraphan"
-date: ""
-output: html_document
+date: ''
+output: pdf_document
 ---
 
 We'll begin by loading all the packages we might need.
@@ -59,12 +59,6 @@ mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93, conf.level = 0.90)
 mpg.t.test
 ```
 
-## at confident level = 70%
-```{r}
-mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93, conf.level = 0.70)
-mpg.t.test
-```
-
 # x, y version
 with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == "non-USA"]))
 ```
@@ -82,7 +76,4 @@ mpg.wilcox.test <- wilcox.test(MPG.highway ~ Origin, data = Cars93)
 mpg.wilcox.test
 ```
 
-**(d)** Are your results for (a) and (c) very different?
-
-The p-value from the t-test is somewhat smaller than that output by wilcox.test. 
 

@@ -1,0 +1,86 @@
+---
+title: "QCC"
+author: "Veerasak Kritsanapraphan"
+date: "8/10/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Quality Control
+
+
+```{r}
+pdensity <- c(10.6817, 10.6040, 10.5709, 10.7858,10.7668, 10.8101, 10.6905, 10.6079,
+10.5724, 10.7736, 11.0921, 11.1023,11.0934, 10.8530, 10.6774, 10.6712,10.6935, 10.5669, 10.8002, 10.7607,10.5470, 10.5555, 10.5705, 10.7723)
+library(qcc)
+cManpower <- c("Recepcionist", "Record. Operator", "Storage operators")
+cMaterials <- c("Supplier", "Transport agency", "Packing")
+cMachines <- c("Compressor type", "Operation conditions",
+"Machine adjustment")
+cMethods <- c("Reception", "Transport method")
+cMeasurements <- c("Recording method", "Measurement appraisal")
+cGroups <- c("Manpower", "Materials", "Machines", "Methods", "Measurements")
+cEffect <- "Too high density"
+```
+
+## Fishbone Diagram
+
+```{r}
+library(qcc) 
+cause.and.effect(cause = list(Manpower = cManpower, 
+                              Materials = cMaterials,
+               Machines = cMachines,
+               Methods = cMethods,
+               Measurements = cMeasurements),
+               effect = cEffect)
+```
+
+Fishbone from SixSigma Package
+
+```{r}
+library(SixSigma) 
+ss.ceDiag(
+effect = cEffect,
+causes.gr <- cGroups,
+causes = list(cManpower, cMaterials, cMachines,
+                cMethods, cMeasurements),
+  main = "Cause-and-effect diagram",
+  sub = "Pellets Density")
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Check Sheet
+
+```{r}
+data_checkSheet <- rbind( data.frame(Group = "Manpower", Cause = cManpower), data.frame(Group = "Machines", Cause = cMachines),
+data.frame(Group = "Materials", Cause = cMaterials),
+data.frame(Group = "Methods", Cause = cMethods),
+data.frame(Group = "Measurements", Cause = cMeasurements)
+)
+library(xtable)
+  print(xtable(data_checkSheet), type = "HTML",
+        html.table.attributes =
+        "border=1 width=100% cellpadding=10")
+  
+```
+
+
+## Control Chart
+
+```{r}
+myControlChart <- qcc(data = pdensity, type = "xbar.one")
+summary(myControlChart)
+```
+
+## Process Capability Analysis
+
+```{r}
+lsl <- 10.85 # Fill in YOUR LSL here!
+usl <- 10.95 # Fill in YOUR USL here!
+process.capability(myControlChart, spec.limits=c(lsl,usl))
+```
+

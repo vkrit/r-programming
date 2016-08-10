@@ -1,8 +1,8 @@
 ---
 title: "Workshop 6 Solution"
 author: "Veerasak Kritsanapraphan"
-date: ""
-output: html_document
+date: ''
+output: pdf_document
 ---
 
 #### 1. Loop practice
