@@ -1,8 +1,8 @@
 ---
 title: "Workshop 10 Solutions"
 author: "Veerasak"
-date: 
-output: html_document
+date: "null"
+output: pdf_document
 ---
 
 We'll begin by loading some packages.
@@ -74,5 +74,14 @@ qplot(data = birthwt, x = mother.age, y = birthwt.grams, colour = mother.smokes)
 ```
 
 ```{r}
-predict(birthwt.lm, birthwt[2,], level = 0.99)
-lm
+birthwt.lm$model
+```
+
+```{r}
+pd <- predict(birthwt.lm, birthwt[2,], level = 0.99)
+str(pd)
+pd
+
+pd <- predict(birthwt.lm, birthwt[3,], level = 0.99)
+str(pd)
+pd
