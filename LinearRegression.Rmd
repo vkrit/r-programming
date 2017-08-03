@@ -1,0 +1,75 @@
+---
+title: "Linear Regression"
+author: "Veerasak Kritsanapraphan"
+date: "8/3/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Stepwise Logistic Regression
+
+Import packages necessary first.
+
+```{r}
+library(MASS)
+library(plyr)
+library(ggplot2)
+library(knitr)
+```
+
+Prepare data
+
+```{r}
+crime <- read.table("crime_simple.txt", sep="\t", header = TRUE)
+
+```
+
+Run Linear regression
+
+```{r}
+# Assign more meaningful variable names
+colnames(crime) <- c("crime.per.million", "young.males", "is.south", "average.ed",
+                     "exp.per.cap.1960", "exp.per.cap.1959", "labour.part",
+                     "male.per.fem", "population", "nonwhite",
+                     "unemp.youth", "unemp.adult", "median.assets", "num.low.salary")
+
+# Convert is.south to a factor
+# Divide average.ed by 10 so that the variable is actually average education
+# Convert median assets to 1000's of dollars instead of 10's
+crime <- transform(crime, is.south = as.factor(is.south),
+                          average.ed = average.ed / 10,
+                          median.assets = median.assets / 100)
+
+# Fit model
+crime.lm <- lm(crime.per.million ~ ., data = crime)
+# Remove 1959 expenditure and youth unemployment
+#crime.lm2 <- update(crime.lm, . ~ . - exp.per.cap.1959 - unemp.youth)
+crime.lm2 <- lm(crime.per.million ~ young.males + average.ed + unemp.adult + num.low.salary, data = crime)
+summary(crime.lm)
+summary(crime.lm2)
+```
+
+Here's a comparison of the regression models (with and without the collinearity problem).
+
+```{r, results = 'asis'}
+kable(summary(crime.lm)$coef, 
+      digits = c(3, 3, 3, 4), format = 'markdown')
+crime.lm.summary2 <- summary(crime.lm2)
+kable(crime.lm.summary2$coef, 
+      digits = c(3, 3, 3, 4), format = 'markdown')
+```
+
+Stepwise Regression
+```{r}
+backwards = step(crime.lm) # Backwards selection is the default
+formula(backwards)
+summary(backwards) 
+```
+
+
+
