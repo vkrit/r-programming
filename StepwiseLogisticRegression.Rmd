@@ -2,7 +2,9 @@
 title: "Stepwise Logistic Regression"
 author: "Veerasak Kritsanapraphan"
 date: "8/3/2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -59,12 +61,18 @@ nothing <- glm(birthwt.below.2500 ~ 1,family=binomial, data = birthwt)
 summary(nothing)
 ```
 
-Stepwise Logistic Regression
+Stepwise Logistic Regression ("Backward")
 ```{r}
 backwards = step(fullmod) # Backwards selection is the default
 formula(backwards)
 summary(backwards) 
 ```
 
+Stepwise Logistic Regression ("Forward")
+```{r}
+forwards <- step(fullmod, direction="forward")
+formula(forwards)
+summary(forwards)
+```
 
 

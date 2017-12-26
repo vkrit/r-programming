@@ -1,0 +1,49 @@
+---
+title: "Kable"
+author: "Veerasak Kritsanapraphan"
+date: "8/16/2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(MASS)
+library(plyr)
+str(birthwt)
+```
+
+```{r}
+# Assign better variable names
+colnames(birthwt) <- c("birthwt.below.2500", "mother.age", "mother.weight", 
+    "race", "mother.smokes", "previous.prem.labor", "hypertension", "uterine.irr", 
+    "physician.visits", "birthwt.grams")
+
+# Assign better labels to categorical variables
+birthwt <- transform(birthwt, 
+            race = as.factor(mapvalues(race, c(1, 2, 3), 
+                              c("white","black", "other"))),
+            mother.smokes = as.factor(mapvalues(mother.smokes, 
+                              c(0,1), c("no", "yes"))),
+            hypertension = as.factor(mapvalues(hypertension, 
+                              c(0,1), c("no", "yes"))),
+            uterine.irr = as.factor(mapvalues(uterine.irr, 
+                              c(0,1), c("no", "yes"))),
+            birthwt.below.2500 = as.factor(mapvalues(birthwt.below.2500,
+                              c(0,1), c("no", "yes")))
+            )
+
+```
+
+```{r, results='asis'}
+library(knitr)
+kable(with(birthwt, tapply(birthwt.grams, INDEX = list(race, mother.smokes), FUN=mean)), format = "markdown")
+```
+
+```{r}
+boxplot(with(birthwt, aggregate(birthwt.grams, by=list(race,mother.smokes), FUN=mean)))
+```

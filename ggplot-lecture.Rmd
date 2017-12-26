@@ -1,15 +1,20 @@
 ---
+output:
+  html_document: default
+  pdf_document: default
+---
+# ---
 title: "ggplot2"
 author: "Veerasak Kritsanapraphan"
 date: "January 28, 2016"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     fig_height: 5
     fig_width: 5
     toc: yes
     toc_depth: 5
+  pdf_document:
+    toc: yes
   word_document: default
 ---
 

@@ -1,8 +1,10 @@
 ---
 title: "Workshop 2 Solutions"
 author: "Veerasak Kritsanapraphan"
-date: ""
-output: html_document
+date: ''
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 Here's an R code chunk that prints the text 'Hello world!'.

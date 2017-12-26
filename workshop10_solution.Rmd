@@ -39,7 +39,6 @@ birthwt <- transform(birthwt,
 ```{r}
 # Run regression model
 birthwt.lm <- lm(birthwt.grams ~ mother.age + mother.smokes, data = birthwt)
-
 # Output coefficients table
 summary(birthwt.lm)
 ```
@@ -76,12 +75,12 @@ qplot(data = birthwt, x = mother.age, y = birthwt.grams, colour = mother.smokes)
 ```{r}
 birthwt.lm$model
 ```
-
+Predict record # 20
 ```{r}
-pd <- predict(birthwt.lm, birthwt[2,], level = 0.99)
-str(pd)
+pd <- predict(birthwt.lm, birthwt[20,], level = 0.99)
 pd
-
-pd <- predict(birthwt.lm, birthwt[3,], level = 0.99)
-str(pd)
-pd
+```
+Actual
+```{r}
+birthwt[20,]
+```

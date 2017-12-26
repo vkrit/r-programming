@@ -1,0 +1,27 @@
+---
+title: "QCC"
+author: "Veerasak Kritsanapraphan"
+date: "6/15/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Quality Control
+
+
+```{r}
+library(SixSigma)
+library(qcc)
+head(ss.data.thickness2)
+```
+
+Create quality control chart
+```{r}
+myContrlChart <- qcc(data=ss.data.thickness2$thickness, type="xbar.one")
+summary(myContrlChart)
+```

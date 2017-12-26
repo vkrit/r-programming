@@ -1,7 +1,9 @@
 ---
 title: "Workshop 3 Solutions"
 author: "Veerasak Kritsanapraphan"
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 ---
 
 #### 1. Data practice
@@ -11,19 +13,19 @@ In class we imported the survey data using the `read.table()` function.
 This is the code we used:
 
 ```{r}
-survey <- read.table("survey_data.csv", header=TRUE, sep=",") 
+survey <- read.csv("survey_data.csv", header=TRUE) 
 ```
 
 ##### (a) How many survey respondents are from MISM or Other?
 
 ```{r}
-sum(survey[["Program"]] == "MISM" | survey[["Program"]] == "Other")
+sum(survey$Program == "MISM" | survey[["Program"]] == "Other")
 ```
 
 ##### (b) What % of survey respondents are from PPM?
 
 ```{r}
-100 * sum(survey[["Program"]] == "PPM") / nrow(survey)
+100 * sum(survey$Program == "PPM") / nrow(survey)
 ```
 
 #### 2. Index practice

@@ -1,0 +1,28 @@
+---
+title: "Read SPSS Data File"
+author: "Veerasak Kritsanapraphan"
+date: "8/16/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Read SPSS Data file
+
+This is how to read SPSS Data file:
+
+```{r}
+library(foreign)
+dat <- read.spss(file="survey.sav")
+str(dat) # list structure with attributes
+```
+
+Read with option to.data.frame
+
+```{r}
+dat <- read.spss(file="survey.sav", to.data.frame=TRUE)
+str(dat) 
+```
+

@@ -1,0 +1,67 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Install and Load RMySQL 
+-----------------------
+
+```{r}
+#install.packages("RMySQL")
+library(RMySQL)
+```
+
+Connecting to MySQL:
+--------------------
+Once the RMySQL library is installed create a database connection object.
+
+```{r}
+mydb = dbConnect(MySQL(), user='stressdbuser', 
+                 password='#October218', 
+                 dbname='stressdb', 
+                 host='35.194.173.89')
+```
+
+Listing Tables and Fields:
+--------------------------
+Now that a connection has been made we list the tables and fields in the database we connected to.
+
+```{r}
+dbListTables(mydb)
+```
+
+This will return a list of the tables in our connection. 
+
+```{r}
+dbListFields(mydb, 'screen')
+```
+
+This will return a list of the fields in some_table.
+
+Running Queries:
+----------------
+Queries can be run using the dbSendQuery function.
+dbSendQuery(mydb, 'drop table if exists some_table, some_other_table')
+
+- Making tables:
+We can create tables in the database using R dataframes.
+
+dbWriteTable(mydb, name='table_name', value=data.frame.name)
+
+Retrieving data from MySQL:
+-----------------------------
+To retrieve data from the database we need to save a results set object.
+
+```{r}
+rs = dbSendQuery(mydb, "select * from screen")
+screendata = fetch(rs, n=-1)
+screendata<-transform(screendata, screen_status=as.factor(screen_status))
+head(screendata, 10)
+```
+
+Plot Chart
+----------
+
+```{r}
+plot(screendata$screen_status)
+```

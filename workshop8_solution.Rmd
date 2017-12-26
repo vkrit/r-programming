@@ -2,7 +2,9 @@
 title: "Workshop 8 Solutions"
 author: "Veerasak Kritsanapraphan"
 date: ''
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 We'll begin by loading all the packages we might need.
@@ -53,10 +55,11 @@ Try doing this both using the formula style input and the `x`, `y` style input.
 mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93)
 mpg.t.test
 ```
-## at confident level = 90%
+
 ```{r}
-mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93, conf.level = 0.90)
-mpg.t.test
+mpg.z.test <- z.test(x=Cars93$Origin, y = Cars93$MPG.highway, alternative = "two.sided", mu = 0, sigma.x = NULL,
+  sigma.y = NULL, conf.level = 0.95)
+mpg.z.test
 ```
 
 # x, y version
@@ -76,4 +79,19 @@ mpg.wilcox.test <- wilcox.test(MPG.highway ~ Origin, data = Cars93)
 mpg.wilcox.test
 ```
 
+## What about one tail?
+
+### Mean of X less then Y
+####t.test(formula,alternative="less")
+
+```{r}
+with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin =="non-USA"], alternative="less")) 
+```
+
+
+### Mean of Y greater than X
+####t.test(formula,alternative="greater")
+```{r}
+with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin =="non-USA"], alternative="greater")) 
+```
 

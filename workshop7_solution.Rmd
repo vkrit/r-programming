@@ -2,7 +2,9 @@
 title: "Workshop 7"
 author: "Veerasak Kritsanapraphan"
 date: ''
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 We'll begin by loading all the required packages.
