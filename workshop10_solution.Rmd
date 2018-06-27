@@ -9,6 +9,7 @@ We'll begin by loading some packages.
 ```{r}
 library(MASS)
 library(plyr)
+library(mctest)
 ```
 
 ### Interaction terms in regression
@@ -32,6 +33,12 @@ birthwt <- transform(birthwt,
             uterine.irr = as.factor(mapvalues(uterine.irr, 
                               c(0,1), c("no", "yes")))
             )
+```
+
+Test for Linear Collenearity
+
+```{r}
+mctest(mother.age, mother.smokes)
 ```
 
 **(a)** Run a linear regression to better understand how birthweight varies with the mother's age and smoking status (do not include interaction terms).

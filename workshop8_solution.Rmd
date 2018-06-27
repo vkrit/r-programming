@@ -3,8 +3,8 @@ title: "Workshop 8 Solutions"
 author: "Veerasak Kritsanapraphan"
 date: ''
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 We'll begin by loading all the packages we might need.
@@ -56,11 +56,6 @@ mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93)
 mpg.t.test
 ```
 
-```{r}
-mpg.z.test <- z.test(x=Cars93$Origin, y = Cars93$MPG.highway, alternative = "two.sided", mu = 0, sigma.x = NULL,
-  sigma.y = NULL, conf.level = 0.95)
-mpg.z.test
-```
 
 # x, y version
 with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == "non-USA"]))

@@ -1,66 +1,46 @@
 ---
-title: "Workshop 4 Solution"
+title: "Workshop 5 Solution"
 author: "Veerasak Kritsanapraphan"
 date: ''
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 ---
 
-For the first two problems we'll use the Cars93 data set from the MASS library.
+#### 1. Loop practice
+
+**(a)** Write a function called `calculateRowMeans` that uses a **for loop** to calculate the row means of a matrix `x`.
 
 ```{r}
-library(MASS)
-```
-
-#### 1. Manipulating data frames
-
-Use the `transform()` and `log()` functions to create a new data frame called `Cars93.log` that has `MPG.highway` and `MPG.city` replaced with `log(MPG.highway)` and `log(MPG.city)`.
-
-```{r}
-Cars93.log <- transform(Cars93, MPG.highway = log(MPG.highway), MPG.city = log(MPG.city)) 
-```
-
-#### 2. Functions, lists, and if-else practice
-
-**(a)** Write a function called `isPassingGrade` whose input `x` is a number, and which returns `FALSE` if `x` is lower than 50 and `TRUE` otherwise.
-
-```{r}
-isPassingGrade <- function(x) {
-  did.pass <- TRUE
-  if(x < 50) {
-    did.pass <- FALSE
+# calculateRowMeans computes the row means of a matrix x
+# input: matrix x
+# output: vector of length nrow(x) giving row means of x
+calculateRowMeans <- function(x) {
+  row.means <- numeric(nrow(x))
+  for(i in 1:nrow(x)) {
+    row.means[i] <- mean(x[i,])
   }
-  did.pass
+  row.means
 }
 
-isPassingGrade(45)
-isPassingGrade(90)
-
-# Here's an alternative, using different syntax
-
-isPassingGrade2 <- function(x) (x >= 50)
-
-isPassingGrade2(45)
-isPassingGrade2(90)
 ```
 
-**(b)** Write a function called `sendMessage` whose input `x` is a number, and which prints `Congratulations` if `isPassingGrade(x)` is `TRUE` and prints `Oh no!` if `isPassingGrade(x)` is `FALSE`.
+**(b)** Try out your function on the random matrix `fake.data` defined below.
 
 ```{r}
-sendMessage <- function(x) {
-  if(isPassingGrade(x)) {
-    print("Congratulations!")
-  } else {
-    print("Oh no!")
-  }
-}
+set.seed(12345) # Set seed of random number generator
+fake.data <- matrix(rnorm(500), ncol=5)
+calculateRowMeans(fake.data)
+```
 
-sendMessage(45)
-sendMessage(90)
+**(b)** Use the `apply()` function to calculate the row means of the matrix `fake.data`
 
-# Here's another way of accomplishing the same thing
+```{r}
+apply(fake.data, MARGIN=1, FUN=mean)
+```
 
-sendMessage2 <- function(x) print(ifelse(isPassingGrade(x), "Congratulations", "Oh no!"))
+**(c)** Compare this to the output of the `rowMeans()` function to check that your calculation is correct.
 
-sendMessage2(45)
-sendMessage2(90)
+```{r}
+identical(calculateRowMeans(fake.data), apply(fake.data, MARGIN=1, FUN=mean))
 ```
