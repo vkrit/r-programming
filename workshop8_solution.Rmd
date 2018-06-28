@@ -3,8 +3,9 @@ title: "Workshop 8 Solutions"
 author: "Veerasak Kritsanapraphan"
 date: ''
 output:
-  html_document: default
+  word_document: default
   pdf_document: default
+  html_document: default
 ---
 
 We'll begin by loading all the packages we might need.
@@ -43,6 +44,13 @@ with(Cars93, qqline(MPG.highway, col = "blue"))
 
 The non-USA MPG.highway data looks very far from normally distributed.
 
+### Check Shapiro-Wilk Normality test
+
+```{r}
+shapiro.test(Cars93$MPG.highway[Cars93$Origin == "USA"])
+
+shapiro.test(Cars93$MPG.highway[Cars93$Origin == "non-USA"])
+```
 
 ### Testing means between two groups
 
@@ -67,12 +75,6 @@ with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == 
 mpg.t.test$conf.int
 ```
 
-**(c)** Repeat part (a) using the `wilcox.test()` function.
-
-```{r}
-mpg.wilcox.test <- wilcox.test(MPG.highway ~ Origin, data = Cars93)
-mpg.wilcox.test
-```
 
 ## What about one tail?
 

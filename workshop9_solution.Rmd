@@ -3,6 +3,7 @@ title: "Lab 9 Solutions"
 author: "Veerasak Kritsanapraphan"
 date: ''
 output:
+  word_document: default
   pdf_document: default
   html_document:
     fig_height: 5
@@ -15,6 +16,7 @@ library(MASS)
 library(plyr)
 library(ggplot2)
 library(reshape)
+library(e1071) 
 ```
 
 Let's form our favourite birthwt data set.
@@ -61,6 +63,22 @@ birthwt$phys.visit.binned
 
 **Hint**: One way of doing this is with mapvalues, by mapping all instances of 3, 4,... etc, to "3 or more".
 
+Histogram of Birthweight
+
+```{r}
+qplot(data=birthwt, x = birthwt.grams, facets = ~phys.visit.binned, geom = "histogram", fill = phys.visit.binned)
+```
+
+##Check for Skewness
+
+```{r}
+with(data=birthwt, skewness(birthwt.grams))
+with(data=birthwt, skewness(birthwt.grams[phys.visit.binned=="0"]))
+with(data=birthwt, skewness(birthwt.grams[phys.visit.binned=="1"]))
+with(data=birthwt, skewness(birthwt.grams[phys.visit.binned=="2"]))
+with(data=birthwt, skewness(birthwt.grams[phys.visit.binned=="3.or.more"]))
+```
+
 **(b)** Run an ANOVA to determine whether the average birth weight varies across number of physician visits.
 
 ```{r}
@@ -72,13 +90,6 @@ The p-value is greater than 0.05, so the variation in birthweight across number 
 
 ```{r}
 plot(aov.birthwt)
-```
-
-```{r}
-posthoc <- TukeyHSD(x=aov.birthwt, 'phys.visit.binned', conf.level=0.95)
-
-print(posthoc)
-plot(posthoc)
 ```
 
 ## Three-way ANOVA

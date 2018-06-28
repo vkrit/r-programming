@@ -3,8 +3,9 @@ title: "Kable"
 author: "Veerasak Kritsanapraphan"
 date: "8/16/2017"
 output:
-  html_document: default
+  word_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
