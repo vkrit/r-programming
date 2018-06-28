@@ -1,8 +1,10 @@
 ---
 title: "Workshop 10 Solutions"
 author: "Veerasak"
-date: "null"
-output: pdf_document
+date: 'null'
+output:
+  word_document: default
+  pdf_document: default
 ---
 
 We'll begin by loading some packages.
@@ -10,6 +12,7 @@ We'll begin by loading some packages.
 library(MASS)
 library(plyr)
 library(mctest)
+library(car)
 ```
 
 ### Interaction terms in regression
@@ -35,11 +38,6 @@ birthwt <- transform(birthwt,
             )
 ```
 
-Test for Linear Collenearity
-
-```{r}
-mctest(mother.age, mother.smokes)
-```
 
 **(a)** Run a linear regression to better understand how birthweight varies with the mother's age and smoking status (do not include interaction terms).
 
@@ -48,6 +46,12 @@ mctest(mother.age, mother.smokes)
 birthwt.lm <- lm(birthwt.grams ~ mother.age + mother.smokes, data = birthwt)
 # Output coefficients table
 summary(birthwt.lm)
+```
+
+##Test for Linear Collenearity
+
+```{r}
+vif(birthwt.lm)
 ```
 
 **(b)** What is the coefficient of mother.age in your regression?  How do you interpret this coefficient?
@@ -82,7 +86,8 @@ qplot(data = birthwt, x = mother.age, y = birthwt.grams, colour = mother.smokes)
 ```{r}
 birthwt.lm$model
 ```
-Predict record # 20
+### Predict record # 20
+
 ```{r}
 pd <- predict(birthwt.lm, birthwt[20,], level = 0.99)
 pd
@@ -90,4 +95,11 @@ pd
 Actual
 ```{r}
 birthwt[20,]
+```
+
+## Predict New Data
+```{r}
+testdata = list(mother.age=20, mother.smokes="yes")
+pd <- predict(birthwt.lm, testdata, level = 0.99)
+pd
 ```
