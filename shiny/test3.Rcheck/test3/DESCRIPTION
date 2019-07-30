@@ -1,0 +1,14 @@
+Package: test3
+Type: Package
+Title: Test333
+Version: 0.1.0
+Author: Veerasak
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+NeedsCompilation: no
+Packaged: 2019-07-25 02:35:42 UTC; kris
+Built: R 3.5.0; ; 2019-07-25 02:35:52 UTC; unix

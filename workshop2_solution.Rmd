@@ -3,6 +3,7 @@ title: "Workshop 2 Solutions"
 author: "Veerasak Kritsanapraphan"
 date: ''
 output:
+  word_document: default
   pdf_document: default
   html_document: default
 ---

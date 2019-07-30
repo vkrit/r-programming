@@ -3,16 +3,15 @@ title: "Workshop 7"
 author: "Veerasak Kritsanapraphan"
 date: ''
 output:
+  word_document: default
   html_document:
     df_print: paged
-  word_document: default
   pdf_document: default
 ---
 
 We'll begin by loading all the required packages.
 ```{r}
 library(MASS)
-library(lattice)
 library(ggplot2)
 ```
 

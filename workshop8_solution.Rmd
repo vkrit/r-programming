@@ -4,7 +4,6 @@ author: "Veerasak Kritsanapraphan"
 date: ''
 output:
   word_document: default
-  pdf_document: default
   html_document: default
 ---
 
@@ -14,9 +13,22 @@ library(MASS)
 library(plyr)
 library(reshape)  # You may need to install this one first!
 library(ggplot2)
+require(moonBook)
+require(webr)
+```
+### Check Means of each group
+```{r}
+aggregate(MPG.highway ~ Origin, data=Cars93, FUN= function(x) {
+  c(mean=mean(x), sd=sd(x))
+} )
+```
+### Check Box Plot
+```{r}
+qplot(x = Origin, y = MPG.highway, geom="boxplot", data = Cars93,
+      xlab = "Origin", ylab="MPG on Highway", fill=I("steelblue"))
 ```
 
-### Is the data normal?
+## Is the data normal?
 
 **(a)** Construct histograms of `MPG.highway`, one plot for each `Origin` category.
 
@@ -44,13 +56,6 @@ with(Cars93, qqline(MPG.highway, col = "blue"))
 
 The non-USA MPG.highway data looks very far from normally distributed.
 
-### Check Shapiro-Wilk Normality test
-
-```{r}
-shapiro.test(Cars93$MPG.highway[Cars93$Origin == "USA"])
-
-shapiro.test(Cars93$MPG.highway[Cars93$Origin == "non-USA"])
-```
 
 ### Testing means between two groups
 
@@ -64,9 +69,17 @@ mpg.t.test <- t.test(MPG.highway ~ Origin, data = Cars93)
 mpg.t.test
 ```
 
-
 # x, y version
-with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == "non-USA"]))
+```{r}
+with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == "non-USA"], alternative="greater"))
+```
+
+## Plot Normal Distribution
+```{r}
+#install.packages("devtools")
+#devtools::install_github("cardiomoon/webr")
+plot(mpg.t.test)
+
 ```
 
 **(b)** What is the confidence interval for the difference?
@@ -75,20 +88,11 @@ with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin == 
 mpg.t.test$conf.int
 ```
 
-
-## What about one tail?
-
-### Mean of X less then Y
-####t.test(formula,alternative="less")
-
+### If it is not normal distribution, we can use Wilcox Test
 ```{r}
-with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin =="non-USA"], alternative="less")) 
+wilcox <- wilcox.test(MPG.highway ~ Origin, exact = FALSE, data=Cars93)
+wilcox
+
 ```
 
-
-### Mean of Y greater than X
-####t.test(formula,alternative="greater")
-```{r}
-with(Cars93, t.test(x = MPG.highway[Origin == "USA"], y = MPG.highway[Origin =="non-USA"], alternative="greater")) 
-```
 

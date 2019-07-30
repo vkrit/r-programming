@@ -1,18 +1,16 @@
 ---
 title: "Workshop 10 Solutions"
 author: "Veerasak"
-date: 'null'
+date: "null"
 output:
   word_document: default
-  pdf_document: default
+  html_document: default
 ---
 
 We'll begin by loading some packages.
 ```{r}
 library(MASS)
 library(plyr)
-library(mctest)
-library(car)
 ```
 
 ### Interaction terms in regression
@@ -38,20 +36,14 @@ birthwt <- transform(birthwt,
             )
 ```
 
-
 **(a)** Run a linear regression to better understand how birthweight varies with the mother's age and smoking status (do not include interaction terms).
 
 ```{r}
 # Run regression model
 birthwt.lm <- lm(birthwt.grams ~ mother.age + mother.smokes, data = birthwt)
+
 # Output coefficients table
 summary(birthwt.lm)
-```
-
-##Test for Linear Collenearity
-
-```{r}
-vif(birthwt.lm)
 ```
 
 **(b)** What is the coefficient of mother.age in your regression?  How do you interpret this coefficient?
@@ -81,25 +73,4 @@ library(ggplot2)
 
 # Note fullrange = TRUE is used here to extend the 'mother.smokes = yes' line beyond the maximum age (35) in this group
 qplot(data = birthwt, x = mother.age, y = birthwt.grams, colour = mother.smokes) + stat_smooth(method = "lm", fullrange = TRUE)
-```
-
-```{r}
-birthwt.lm$model
-```
-### Predict record # 20
-
-```{r}
-pd <- predict(birthwt.lm, birthwt[20,], level = 0.99)
-pd
-```
-Actual
-```{r}
-birthwt[20,]
-```
-
-## Predict New Data
-```{r}
-testdata = list(mother.age=20, mother.smokes="yes")
-pd <- predict(birthwt.lm, testdata, level = 0.99)
-pd
 ```

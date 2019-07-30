@@ -3,6 +3,7 @@ title: "Stepwise Logistic Regression"
 author: "Veerasak Kritsanapraphan"
 date: "8/3/2017"
 output:
+  word_document: default
   pdf_document: default
   html_document: default
 ---

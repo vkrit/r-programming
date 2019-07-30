@@ -2,7 +2,10 @@
 title: "Workshop 4 Solution"
 author: "Veerasak Kritsanapraphan"
 date: ''
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
 ---
 
 For the first two problems we'll use the Cars93 data set from the MASS library.
